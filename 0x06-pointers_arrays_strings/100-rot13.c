@@ -1,4 +1,4 @@
-#include "main.h"
+#include "holberton.h"
 
 /**
  * *rot13 - encodes a string using rot13.
@@ -25,3 +25,6 @@ char *rot13(char *str)
 	}
 	return (str);
 }
+© 2022 GitHub, Inc.
+Terms
+Pri
