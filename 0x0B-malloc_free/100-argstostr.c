@@ -1,51 +1,40 @@
-#include "main.h"
-#include <stdlib.h>
+#include "holberton.h"
+
 /**
- * *argstostr - concatenates all the arguments of program.
- * @ac: argument counter.
- * @av: argument vector.
- * Return: NULL if ac == 0 or av == NULL else
- * pointer to a string of NULL if it fails.
+ * argstostr - concatenate all arguments into a new string
+ * @ac: the argument count
+ * @av: the argument vector
+ *
+ * Return: NULL memory allocation fails, ac is 0 or av is NULL,
+ * otherwise return a pointer to the new string
  */
 char *argstostr(int ac, char **av)
 {
-	int i, j, k, length;
-	char *str;
+	char *cat, *chr;
+	int arg, size;
 
-	length = 0;
-	k = 0;
-	if (ac == 0 || av == NULL)
+	if (!ac || !av)
 		return (NULL);
 
-	i = 0;
-	while (i < ac)
+	for (arg = 0, size = 1; arg < ac; ++arg, ++size)
 	{
-		j = 0;
-		while (av[i][j])
-		{
-			length++;
-			j++;
-		}
-		length++;
-		i++;
+		for (chr = av[arg]; *chr; ++chr, ++size)
+			;
 	}
-	str = malloc((sizeof(char) + length) + 1);
-	if (str == NULL)
+
+	cat = (char *) malloc(sizeof(char) * size);
+
+	if (!cat)
 		return (NULL);
-	i = 0;
-	while (i < ac)
+
+	for (arg = 0, size = 0; arg < ac; ++arg, ++size)
 	{
-		j = 0;
-		while (av[i][j])
-		{
-			str[k] = av[i][j];
-			j++;
-			k++;
-		}
-		str[k] = '\n';
-		k++;
-		i++;
+		for (chr = av[arg]; *chr; ++chr, ++size)
+			cat[size] = *chr;
+		cat[size] = '\n';
 	}
-	str[k] = '\0';
-	return (str);
+
+	cat[size] = '\0';
+
+	return (cat);
 }
