@@ -1,25 +1,26 @@
 #include "holberton.h"
-#include <stdio.h>
+#include <stddef.h>
 #include <stdlib.h>
 
 /**
- * simple_print_buffer - prints buffer in hexa
- * @buffer: the address of memory to print
- * @size: the size of the memory to print
+ * *create_array - creates an array of chars and
+ * intitializes it with specific char.
  *
- * Return: Nothing.
+ * @size: size of chars.
+ * @c: character.
+ * Return: NULL if size is zero, pointer to array if success else null.
  */
 char *create_array(unsigned int size, char c)
 {
-  unsigned int i;
+	char *array;
+	unsigned int i;
 
-  if (size == 0)
-      return (NULL);
-
-  char *s = (char*)malloc(size * sizeof(char));
-
-  for (i = 0; i < size; i++)
-    s[i] = c;
-
-  return (s);
+	if (size == 0)
+		return (NULL);
+	array = malloc(sizeof(char) * size);
+	if (array == NULL)
+		return (NULL);
+	for (i = 0; i < size; i++)
+		array[i] = c;
+	return (array);
 }
