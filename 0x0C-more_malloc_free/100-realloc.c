@@ -1,40 +1,36 @@
-#include "holberton.h"
-#include "notrebloh.h"
-#include <stdio.h>
 #include <stdlib.h>
-#include <string.h>
 /**
- * *_realloc - reallocate memory size function
- * @ptr: pointer to address of old memory location
- * @old_size: unsigned int type of old memory size
- * @new_size: unsigned int type for new memory size
- * Return:  return pointer to array
- */
-
+  * _realloc - reallocates a memory block
+  * @ptr: pointer to the original memory block
+  * @old_size: old size of memory block
+  * @new_size: new size of memory block
+  * Return: pointer to reallocated memory block
+  */
 void *_realloc(void *ptr, unsigned int old_size, unsigned int new_size)
 {
-	char *s;
+	char *p, *castptr;
+	unsigned int i;
 
-	if (new_size > old_size)
-	{
-		s = malloc(new_size);
-		free(ptr);
-		return (s);
-	}
-	if (new_size == old_size)
-	{
-		return (ptr);
-	}
-	if (ptr == NULL)
-	{
-		s = malloc(new_size);
-		free(ptr);
-		return (s);
-	}
-	if (new_size == 0 && ptr != NULL)
+	if (ptr != NULL && new_size == 0)
 	{
 		free(ptr);
 		return (NULL);
+	}
+	if (new_size == old_size)
+		return (ptr);
+	if (ptr == NULL)
+	{
+		p = malloc(new_size);
+		return (p);
+	}
+	if (new_size > old_size)
+	{
+		p = malloc(new_size * sizeof(char));
+		castptr = ptr;
+		for (i = 0; i < old_size; i++)
+			p[i] = castptr[i];
+		free(ptr);
+		return (p);
 	}
 	return (ptr);
 }
